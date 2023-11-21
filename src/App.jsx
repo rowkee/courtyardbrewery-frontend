@@ -7,6 +7,7 @@ import BreweryTapPage from './components/BreweryTapPage.jsx'
 import SudburyTapPage from './components/SudburyTapPage.jsx'
 import HalsteadTapPage from './components/HalsteadTapPage.jsx'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+// require('dotenv').config()
 
 
 function App() {
@@ -17,8 +18,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/beers" element={<BeersPage />} />
         <Route path="/our-locations/brewery" element={<BreweryTapPage />} />
-        <Route path="/our-locations/sudbury" element={<HalsteadTapPage />} />
-        <Route path="/our-locations/halstead" element={<SudburyTapPage />} />
+        <Route path="/our-locations/sudbury" element={<SudburyTapPage />} />
+        <Route path="/our-locations/halstead" element={<HalsteadTapPage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
       </Routes>
     </BrowserRouter>
