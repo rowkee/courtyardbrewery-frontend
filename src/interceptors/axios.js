@@ -22,7 +22,7 @@ axios.interceptors.response.use(
       );
       if (response.status === 200) {
         axios.defaults.headers.common["Authorization"] = `Bearer 
-       ${response.data["access"]}`;
+        ${response.data["access"]}`;
         localStorage.setItem("access_token", response.data.access);
         localStorage.setItem("refresh_token", response.data.refresh);
         return axios(error.config);

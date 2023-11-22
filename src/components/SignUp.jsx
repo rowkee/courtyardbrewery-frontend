@@ -28,6 +28,7 @@ export default function SignUp() {
         if (response.ok) {
           const data = await response.json();
           console.log('User signed up successfully:', data);
+          alert('You are signed up!')
         }
       } catch (error) {
         console.error('Error during sign-up:', error);
