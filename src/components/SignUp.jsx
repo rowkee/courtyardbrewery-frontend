@@ -6,7 +6,8 @@ export default function SignUp() {
       username: '',
       first_name: '',
       last_name: '',
-      password: ''
+      password: '',
+      password_confirmation: ''
     });
   
     const handleInputChange = (e) => {
@@ -17,7 +18,7 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await fetch('http://localhost:8000/signup', {
+        const response = await fetch(`http://localhost:8000/signup/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -61,6 +62,13 @@ export default function SignUp() {
         name="password"
         placeholder="Password"
         value={formData.password}
+        onChange={handleInputChange}
+      />
+      <input
+        type="password"
+        name="password_confirmation"
+        placeholder="Confirm Password"
+        value={formData.password_confirmation}
         onChange={handleInputChange}
       />
       <button type="submit">Sign Up</button>
