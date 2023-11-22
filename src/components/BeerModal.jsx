@@ -5,7 +5,7 @@ import Reviews from './Reviews';
 import ModalBody from 'react-bootstrap/esm/ModalBody';
 
 export default function BeerModal(beer) {
-const {title, description, abv, id} = beer.beer.beer
+const {title, description, abv} = beer.beer.beer
 console.log(beer)
   const [show, setShow] = useState(false);
 
