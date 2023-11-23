@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'react-bootstrap/esm/Button'
+// import Button from 'react-bootstrap/esm/Button'
 
 export default function Reviews({review}) {
   const {title, review_content} = review
