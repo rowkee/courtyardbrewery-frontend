@@ -27,12 +27,12 @@ export default function BeerModal({beer}) {
   
 
 //* THIS IS NEEDED TO KNOW WHICH MODAL TO SHOW
-  useEffect((id) => {
+  useEffect(() => {
     const accessToken = localStorage.getItem("access_token")
     if (accessToken) {
       setIsLoggedIn(true);
 
-    const getReviews = async () => { 
+    const getReviews = async (beer) => { 
       const id = beer.id
       await fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
       .then(result => result.json())
