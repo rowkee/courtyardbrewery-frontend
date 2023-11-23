@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function Reviews({review}) {
   const {title, review_content} = review
-  console.log(review)
   return (
     <>
         <h5>{title}</h5>
