@@ -3,12 +3,14 @@ import BeerCard from "./BeerCard";
 
 export default function BeersPage() {
   const [beers, setBeers] = useState([]);
- 
+
   useEffect(()=>{
     const getBeers = async () => {
-         await fetch(`http://localhost:8000/beers`)
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/beers`)
         .then(result => result.json())
-        .then(data => setBeers(data))
+        .then(data => {
+          setBeers(data)
+        })
     }
     getBeers()
 },[])

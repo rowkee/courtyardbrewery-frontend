@@ -2,8 +2,8 @@ import Card from "react-bootstrap/Card";
 import BeerModal from "./BeerModal";
 
 
-export default function BeerCard(beer) {
-  const {title, short_description} = beer.beer
+export default function BeerCard({beer}) {
+  const {title, short_description} = beer
   
   return (
     <Card style={{ width: "18rem" }}>
