@@ -13,7 +13,6 @@ export default function BeerModal({beer}) {
   const userId = decodedToken.user_id
 
   const { id, title, description, abv} = beer;
-  console.log(id);
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [reviewDataToSubmit, setReviewDataToSubmit] = useState({
     title: "",
@@ -22,6 +21,7 @@ export default function BeerModal({beer}) {
     beer: id
   })
   //These reviews are per beer
+
   const [reviews, setReviews] = useState([])
 
   
@@ -88,7 +88,13 @@ export default function BeerModal({beer}) {
         </Modal.Header>
         <Modal.Body>{description}</Modal.Body>
         <ModalBody>
-          <Reviews />
+          {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <Reviews key={index} review={review} />
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
         </ModalBody>
         <Modal.Footer>
           {isLoggedIn ? (      
