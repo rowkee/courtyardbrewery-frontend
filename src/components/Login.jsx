@@ -13,7 +13,7 @@ export const Login = () => {
       password: password,
     };
     // Create the POST requuest
-    const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,{responseType:'json'},
+    const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,
     {
       headers: { "Content-Type": "application/json" },
     },

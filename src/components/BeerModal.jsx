@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Reviews from "./Reviews";
-import ModalBody from "react-bootstrap/esm/ModalBody";
+// import ModalBody from "react-bootstrap/esm/ModalBody";
 import Form from "react-bootstrap/Form"
 import { jwtDecode } from "jwt-decode"
 import axios from "axios"
@@ -76,56 +76,73 @@ export default function BeerModal({beer}) {
   }
 
   return (
-    <>
-      {/* This is the beer modal */}
+<>
+      {/* Beer Modal */}
       <Button variant="primary" onClick={handleShowBeer}>
         See Reviews
       </Button>
       <Modal size="lg" show={showBeer} onHide={handleCloseBeer}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {title} - {abv}%
-          </Modal.Title>
+          <Modal.Title>{title} - {abv}%</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{description}</Modal.Body>
-        <ModalBody>
+        <Modal.Body>
+          <p>{description}</p>
+          <hr />
+          <h5>Reviews</h5>
           {reviews.length > 0 ? (
-          reviews.map((review, index) => (
-            <Reviews key={index} review={review} />
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
-        </ModalBody>
+            reviews.map((review, index) => (
+              <div key={index}>
+                <Reviews review={review} />
+                <hr />
+              </div>
+            ))
+          ) : (
+            <p>No reviews yet.....</p>
+          )}
+        </Modal.Body>
         <Modal.Footer>
-          {isLoggedIn ? (      
-          <Button variant="primary" onClick={handleCloseBeerAddReview}>
-            Add Review
-          </Button> 
-          ) : ( 
-          <Button variant="primary" disabled>
-            Add Review
-          </Button> 
+          {isLoggedIn ? (
+            <Button variant="primary" onClick={handleCloseBeerAddReview}>
+              Add Review
+            </Button>
+          ) : (
+            <Button variant="primary" disabled>
+              Add Review
+            </Button>
           )}
         </Modal.Footer>
       </Modal>
 
-      {/* this is the review modal */}
+      {/* Review Modal */}
       <Modal size="lg" show={showReview} onHide={handleCloseReview}>
         <Modal.Header closeButton>
           <Modal.Title>New Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="review_description"
-            >
-              {/* THE REVIEW DATA TO BE SENT IS BEING UPDATED ON EACH KEYBOARD CLICK */}
+            <Form.Group className="mb-3" controlId="review_description">
               <Form.Label>Review title</Form.Label>
-              <Form.Control as="textarea" rows={1} onChange={e => setReviewDataToSubmit({...reviewDataToSubmit, title: e.target.value})}/>
+              <Form.Control
+                as="textarea"
+                rows={1}
+                onChange={(e) =>
+                  setReviewDataToSubmit({
+                    ...reviewDataToSubmit,
+                    title: e.target.value
+                  })
+                }
+              />
               <Form.Label>Please add your review below:</Form.Label>
-              <Form.Control as="textarea" rows={3} onChange={e => setReviewDataToSubmit({...reviewDataToSubmit, review_content: e.target.value})}/>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(e) =>
+                  setReviewDataToSubmit({
+                    ...reviewDataToSubmit,
+                    review_content: e.target.value
+                  })
+                }
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -137,4 +154,4 @@ export default function BeerModal({beer}) {
       </Modal>
     </>
   );
-}
+};

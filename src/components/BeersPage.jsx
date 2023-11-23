@@ -18,8 +18,16 @@ export default function BeersPage() {
 //   console.log(beers)
   return (
     <>
-      <h1>Beers</h1>
-      <div className="card-list">
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Our Beers</h1>
+      <div 
+        className="card-list"
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '20px',
+          justifyContent: 'space-around'  
+        }}    
+      >
         {beers.length > 0 ? (
           beers.map((beer, index) => (
             <BeerCard key={index} beer={beer} />
