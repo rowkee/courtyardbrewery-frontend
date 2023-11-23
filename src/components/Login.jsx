@@ -13,14 +13,31 @@ export const Login = () => {
       password: password,
     };
     // Create the POST requuest
-    const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,
+    const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,{responseType:'json'},
     {
       headers: { "Content-Type": "application/json" },
     },
     {
         withCredentials: true
-    },
+    }, 
     );
+
+    // const data = async () => {
+    //   try {
+    //     // eslint-disable-next-line no-unused-vars
+    //     await axios.post(`${process.env.REACT_APP_BACKEND_URL}/token/`, user,{responseType:'json'},
+    //   {
+    //     headers: { "Content-Type": "application/json" },
+    //   },
+    //   {
+    //     withCredentials: true
+    //   },
+    //   );
+    //   }
+    //   catch (error){
+    //     console.log("Can't submit review", error);
+    //   }
+    // }
 
     // Initialize the access & refresh token in localstorage.
     localStorage.clear();
