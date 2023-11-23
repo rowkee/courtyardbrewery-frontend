@@ -36,11 +36,13 @@ export default function BeerModal({beer}) {
       await fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
       .then(result => result.json())
       .then(data => setReviews(data))
+    
   }
     getReviews()
     }
   },[id])
 
+  
 //* THESE HANDLE THE OPENING AND CLOSING OF THE MODALS
   const [showBeer, setShowBeer] = useState(false);
   const [showReview, setShowReview] = useState(false);
