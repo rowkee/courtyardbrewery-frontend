@@ -8,7 +8,6 @@ import axios from "axios";
 
 export default function BeerModal({ beer }) {
 
-  const accessToken = localStorage.getItem("access_token");
   const { id, title, description, abv } = beer;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +23,7 @@ export default function BeerModal({ beer }) {
   const [userId, setUserId] = useState(null)
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("access_token");
     if (accessToken) {
       setIsLoggedIn(true);
       const decodedToken = jwtDecode(accessToken);
@@ -34,7 +34,7 @@ export default function BeerModal({ beer }) {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
       .then((result) => result.json())
       .then((data) => setReviews(data));
-  }, [accessToken, id]);
+  }, [id]);
 
   const handleCloseBeer = () => setShowBeer(false);
   const handleShowBeer = () => setShowBeer(true);
