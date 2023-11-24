@@ -55,7 +55,10 @@ export default function BeerModal({ beer }) {
         `${process.env.REACT_APP_BACKEND_URL}/reviews/`,
         reviewDataToSubmit,
         {
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+        },
           withCredentials: true,
         }
       );
