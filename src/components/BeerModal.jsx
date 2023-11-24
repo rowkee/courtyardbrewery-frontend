@@ -31,7 +31,7 @@ export default function BeerModal({ beer }) {
       setUserId(userId)
     }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
+  fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
       .then((result) => result.json())
       .then((data) => setReviews(data));
   }, [id]);
@@ -51,15 +51,17 @@ export default function BeerModal({ beer }) {
     })
     e.preventDefault();
     try {
-      await axios.post(
+      await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/reviews/`,
         reviewDataToSubmit,
         {
           headers: { 
             "Content-Type": "application/json",
-            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+            "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Credentials": true,
+            "Authorization": `Bearer ${localStorage.getItem("access_token")}`
         },
-          withCredentials: true,
+          withCredentials: null,
         }
       );
       handleCloseReview();
@@ -68,6 +70,33 @@ export default function BeerModal({ beer }) {
     }
   };
   console.log(reviewDataToSubmit);
+  // const handleSubmit = async (e) => {
+  //     setReviewDataToSubmit({
+  //       ...reviewDataToSubmit,
+  //       user: userId
+  //     })
+  //     e.preventDefault();
+  //     try {
+  //       await fetch(
+  //         `${process.env.REACT_APP_BACKEND_URL}/reviews/`, {
+  //           method: 'POST',
+  //           headers: { 
+  //             "Content-Type": "application/json",
+  //             // "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+  //             // "Access-Control-Allow-Credentials": true
+  //             "Authorization": `Bearer ${localStorage.getItem("access_token")}`
+  //         },
+  //         body: JSON.stringify(reviewDataToSubmit)
+  //         }
+  //       );
+  //       handleCloseReview();
+  //     } catch (e) {
+  //       console.log("Can't submit review", e);
+  //     }
+  //   };
+  //   console.log(reviewDataToSubmit);
+
+
   return (
     <>
       {/* Beer Modal */}
