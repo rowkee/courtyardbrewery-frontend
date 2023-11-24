@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Reviews from "./Reviews";
 import Form from "react-bootstrap/Form";
 import {jwtDecode} from "jwt-decode";
-import axios from "axios";
+// import axios from "axios";
 
 export default function BeerModal({ beer }) {
 
@@ -70,31 +70,7 @@ export default function BeerModal({ beer }) {
     }
   };
   console.log(reviewDataToSubmit);
-  // const handleSubmit = async (e) => {
-  //     setReviewDataToSubmit({
-  //       ...reviewDataToSubmit,
-  //       user: userId
-  //     })
-  //     e.preventDefault();
-  //     try {
-  //       await fetch(
-  //         `${process.env.REACT_APP_BACKEND_URL}/reviews/`, {
-  //           method: 'POST',
-  //           headers: { 
-  //             "Content-Type": "application/json",
-  //             // "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-  //             // "Access-Control-Allow-Credentials": true
-  //             "Authorization": `Bearer ${localStorage.getItem("access_token")}`
-  //         },
-  //         body: JSON.stringify(reviewDataToSubmit)
-  //         }
-  //       );
-  //       handleCloseReview();
-  //     } catch (e) {
-  //       console.log("Can't submit review", e);
-  //     }
-  //   };
-  //   console.log(reviewDataToSubmit);
+
 
 
   return (
