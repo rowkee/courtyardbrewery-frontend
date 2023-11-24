@@ -6,7 +6,7 @@ export default function BeersPage() {
 
   useEffect(()=>{
     const getBeers = async () => {
-        await fetch(`${process.env.REACT_APP_BACKEND_URL}/beers`)
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/beers/`)
         .then(result => result.json())
         .then(data => {
           setBeers(data)

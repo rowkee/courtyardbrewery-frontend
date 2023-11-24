@@ -2,50 +2,39 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Reviews from "./Reviews";
-// import ModalBody from "react-bootstrap/esm/ModalBody";
-import Form from "react-bootstrap/Form"
-import { jwtDecode } from "jwt-decode"
-import axios from "axios"
+import Form from "react-bootstrap/Form";
+import {jwtDecode} from "jwt-decode";
+import axios from "axios";
 
-export default function BeerModal({beer}) {
-  const accessToken = localStorage.getItem("access_token")
-  const decodedToken = jwtDecode(accessToken)
-  const userId = decodedToken.user_id
+export default function BeerModal({ beer }) {
 
-  const { id, title, description, abv} = beer;
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const accessToken = localStorage.getItem("access_token");
+  const { id, title, description, abv } = beer;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [reviewDataToSubmit, setReviewDataToSubmit] = useState({
     title: "",
     review_content: "",
-    user: userId,
-    beer: id
-  })
-  //These reviews are per beer
-
-  const [reviews, setReviews] = useState([])
-
-  
-
-//* THIS IS NEEDED TO KNOW WHICH MODAL TO SHOW
-  useEffect(() => {
-    const accessToken = localStorage.getItem("access_token")
-    if (accessToken) {
-      setIsLoggedIn(true);
-
-    const getReviews = async () => { 
-      await fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
-      .then(result => result.json())
-      .then(data => setReviews(data))
-    
-  }
-    getReviews()
-    }
-  },[id])
-
-  
-//* THESE HANDLE THE OPENING AND CLOSING OF THE MODALS
+    user: "",
+    beer: id,
+  });
+  const [reviews, setReviews] = useState([]);
   const [showBeer, setShowBeer] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [userId, setUserId] = useState(null)
+
+  useEffect(() => {
+    if (accessToken) {
+      setIsLoggedIn(true);
+      const decodedToken = jwtDecode(accessToken);
+      const userId = decodedToken.user_id
+      setUserId(userId)
+    }
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/beer/review/${id}/`)
+      .then((result) => result.json())
+      .then((data) => setReviews(data));
+  }, [accessToken, id]);
 
   const handleCloseBeer = () => setShowBeer(false);
   const handleShowBeer = () => setShowBeer(true);
@@ -54,29 +43,30 @@ export default function BeerModal({beer}) {
     setShowReview(true);
   };
   const handleCloseReview = () => setShowReview(false);
-  
-  //* SUBMIT
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    setReviewDataToSubmit({
+      ...reviewDataToSubmit,
+      user: userId
+    })
+    e.preventDefault();
     try {
-      // eslint-disable-next-line no-unused-vars
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/reviews/`, reviewDataToSubmit,
-    {
-      headers: { "Content-Type": "application/json" },
-    },
-    {
-      withCredentials: true
-    },
-    );
-    handleCloseReview()
-    }
-    catch (e){
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/reviews/`,
+        reviewDataToSubmit,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      handleCloseReview();
+    } catch (e) {
       console.log("Can't submit review", e);
     }
-  }
-
+  };
+  console.log(reviewDataToSubmit);
   return (
-<>
+    <>
       {/* Beer Modal */}
       <Button variant="primary" onClick={handleShowBeer}>
         See Reviews
@@ -114,44 +104,48 @@ export default function BeerModal({beer}) {
       </Modal>
 
       {/* Review Modal */}
-      <Modal size="lg" show={showReview} onHide={handleCloseReview}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Review</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="review_description">
-              <Form.Label>Review title</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={1}
-                onChange={(e) =>
-                  setReviewDataToSubmit({
-                    ...reviewDataToSubmit,
-                    title: e.target.value
-                  })
-                }
-              />
-              <Form.Label>Please add your review below:</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                onChange={(e) =>
-                  setReviewDataToSubmit({
-                    ...reviewDataToSubmit,
-                    review_content: e.target.value
-                  })
-                }
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleSubmit}>
-            SAVE REVIEW
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {isLoggedIn ? (
+        <Modal size="lg" show={showReview} onHide={handleCloseReview}>
+          <Modal.Header closeButton>
+            <Modal.Title>New Review</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group className="mb-3" controlId="review_description">
+                <Form.Label>Review title</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={1}
+                  onChange={(e) =>
+                    setReviewDataToSubmit({
+                      ...reviewDataToSubmit,
+                      title: e.target.value
+                    })
+                  }
+                />
+                <Form.Label>Please add your review below:</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  onChange={(e) =>
+                    setReviewDataToSubmit({
+                      ...reviewDataToSubmit,
+                      review_content: e.target.value
+                    })
+                  }
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleSubmit}>
+              SAVE REVIEW
+            </Button>
+          </Modal.Footer>
+        </Modal> ) : (
+          <> </>
+        )
+      }
     </>
   );
 };
