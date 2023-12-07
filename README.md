@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Courtyard Brewery - Full Stack Website for a Microbrewery
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## TL;DR
+This was the final project of the course, the requirement were as follows:
+* Be a full-stack **Django/React** application.
+* Connect to and perform data operations on a **PostgreSQL** database (the default SQLLite3 database is not acceptable).
+* If consuming a third party API (OPTIONAL), have at least **one data entity** (Model) in addition to the built-in User model. The related entity can be either a **one-to-many (1:M) or a many-to-many (M:M)** relationship. 
+* Have **full-CRUD data operations** across any combination of the app's models 
+☐ **Authenticate users using Django's built-in authentication**.
 
-## Available Scripts
+For my final project I wanted to work on something that I knew a real business could benefit from. Having worked with the Courtyard Brewery recently I knew they were in need of a website, one where they could manage the content and stock easily. 
 
-In the project directory, you can run:
+The app was designed and built in 6 days. The deployed version can be found [HERE](https://courtyardbrewery-frontend-production.up.railway.app/).
 
-### `npm start`
+### Tech Stack
+* React
+* Bootstrap
+* JWT Auth
+* Python
+* Django
+* PostgreSQL
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Process
 
-### `npm test`
+### Planning
+I used a Miro board [HERE](https://miro.com/app/board/uXjVNfP-OMU=/?share_link_id=167399156126)to plan what I want to do with this project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Knowing that this project was likely to go live and be used by the Brewery, I wanted to get their input and feedback early on. I created wireframes that I could easily share with the Brewery to get their feedback on. 
 
-### `npm run build`
+Once I had outline the basic functionality and information I needed, I created the ERD diagrams I needed. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For each increment I would write pseudocode, again with the purpose of helping me focus on what exactly I wanted to achieve with each piece of code I was writing. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Coding 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Future Developments
+### BUGs
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
+## Summary
+### Challenges 
